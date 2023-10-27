@@ -46,11 +46,11 @@ class EsameDB
 @Model
 class QuizDB{
     @Attribute(.unique) var id: Int
-    @Relationship(inverse: \EsameDB.quiz) var esame: EsameDB?
-    var domanda: DomandaDB?
+    @Relationship(inverse: \EsameDB.quiz) var esame: EsameDB
+    var domanda: DomandaDB
     var rispostaData: RispostaDB?
     
-    init(id: Int, esame: EsameDB? = nil, domanda: DomandaDB? = nil, rispostaData: RispostaDB? = nil) {
+    init(id: Int, esame: EsameDB, domanda: DomandaDB, rispostaData: RispostaDB) {
         self.id = id
         self.esame = esame
         self.domanda = domanda
@@ -62,13 +62,13 @@ class QuizDB{
 class DomandaDB {
     @Attribute(.unique) var id: Int
     var descrizione: String
-    var id_rispostaCoretta: RispostaDB?
+    var rispostaCorretta: RispostaDB
     
 
-    init(id: Int, descrizione: String, id_rispostaCoretta: RispostaDB? = nil) {
+    init(id: Int, descrizione: String, rispostaCorretta: RispostaDB) {
         self.id = id
         self.descrizione = descrizione
-        self.id_rispostaCoretta = id_rispostaCoretta
+        self.rispostaCorretta = rispostaCorretta
     }
 }
 

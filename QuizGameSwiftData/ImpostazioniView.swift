@@ -9,47 +9,52 @@ import SwiftUI
 
 struct ImpostazioniView: View {
     var body: some View {
-        VStack(spacing: 20) {
-            Titolo(titolo: "Impostazioni")
-                .padding(.bottom, 30)
+        NavigationStack{
+            VStack(spacing: 20) {
+                Titolo(titolo: "Impostazioni")
+                    .padding(.bottom, 30)
+                
+                Text("Modifica Profilo").frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title2)
+                    .padding(.leading)
+                    .padding(.bottom, 10)
+                Text("Cambia Password").frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title2)
+                    .padding(.leading)
+                    .padding(.bottom, 10)
+                Text("Reset").frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.title2)
+                    .padding(.leading)
+                    .padding(.bottom, 10)
 
-            Text("Modifica Profilo").frame(maxWidth: .infinity, alignment: .leading)
-                .font(.title2)
-                .padding(.leading)
-                .padding(.bottom, 10)
-            Text("Cambia Password").frame(maxWidth: .infinity, alignment: .leading)
-                .font(.title2)
-                .padding(.leading)
-                .padding(.bottom, 10)
-            Text("Reset").frame(maxWidth: .infinity, alignment: .leading)
-                .font(.title2)
-                .padding(.leading)
-                .padding(.bottom, 10)
-
-            Spacer()
-            VStack {
-                Image("ITSARicon")
+                Spacer()
+                VStack {
+                    Image("ITSARicon")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 250)
                         .padding(.vertical)
-                Text("UFS14 - Progettazione e Sviluppo iOS").font(.footnote)
-                Text("QuizAR - Abou, Frigerio, Scarafoni").font(.footnote)
-            }
-            
-            Spacer()
-        
-            NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true)){
-                        Text("Logout").font(.title3)
-                    .padding(.leading, 10)
-                    .padding(.trailing, 10)
+                    NavigationLink(destination: AddDatabaseDataView()){
+                        Text("modifica database")
                     }
-                    .padding()
-                    .foregroundColor(Color.white)
-                    .background(Color.red)
-                    .cornerRadius(12)
-            Spacer()
-
+                    Text("UFS14 - Progettazione e Sviluppo iOS").font(.footnote)
+                    Text("QuizAR - Abou, Frigerio, Scarafoni").font(.footnote)
+                }
+                
+                Spacer()
+                
+                NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true)){
+                    Text("Logout").font(.title3)
+                        .padding(.leading, 10)
+                        .padding(.trailing, 10)
+                }
+                .padding()
+                .foregroundColor(Color.white)
+                .background(Color.red)
+                .cornerRadius(12)
+                Spacer()
+                
+            }
         }
     }
 }

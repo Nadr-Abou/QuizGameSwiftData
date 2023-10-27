@@ -46,7 +46,12 @@ struct Titolo: View {
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var users: [UserDB]
+    @Query private var domande: [DomandaDB]
+    @Query private var risposte: [RispostaDB]
+    
+    
+    
+    
     
     var logged = false
      
@@ -63,11 +68,14 @@ struct ContentView: View {
              .padding()
          }
      }
+    //inizializzazione per ora manuale del DB
+
+    
  }
 
 
 
 #Preview {
     ContentView()
-        .modelContainer(for: UserDB.self, inMemory: true)
+        .modelContainer(for: [DomandaDB.self, RispostaDB.self], inMemory: true)
 }
