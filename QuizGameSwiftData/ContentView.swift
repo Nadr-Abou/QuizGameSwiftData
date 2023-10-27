@@ -102,11 +102,13 @@ struct ContentView: View {
         }
     }
     
-    private func addQuestion(id:Int, descrizione: String, id_RC: Risposta){
-        modelContext.insert(DomandaQuiz(id: id, descrizione: "Come stai oggi?", id_rispostaCoretta: id_RC))
+    private func addQuestion(id:Int, descrizione: String, id_RC: RispostaDB){
+        modelContext.insert(DomandaQuiz(id: id, descrizione: descrizione, id_rispostaCoretta: id_RC))
     }
     
-    private func addAnswer(){}
+    private func addAnswer(id: Int, descrizione:String){
+        modelContext.insert(Risposta(id:id, descrizione: descrizione))
+    }
 }
 
 /*

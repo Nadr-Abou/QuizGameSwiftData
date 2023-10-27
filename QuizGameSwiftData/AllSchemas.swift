@@ -10,13 +10,14 @@ import SwiftData
 
 
 @Model
-class User{
+class UserDB{
     @Attribute(.unique) var id: Int
     var nome: String
     var email: String
-    var esami: [Esame]?
+    var esami: [EsameDB]?
     
-    init(id: Int, nome: String, email: String, esami: [Esame]? = nil) {
+    
+    init(id: Int, nome: String, email: String, esami: [EsameDB]? = nil) {
         self.id = id
         self.nome = nome
         self.email = email
@@ -25,59 +26,58 @@ class User{
 }
 
 @Model
-class Esame
+class EsameDB
 {
     @Attribute(.unique) var id: Int
-    var Quiz: [Quiz]?
-    @Relationship(inverse: \User.id) var id_utente: Int
+    var quiz: [QuizDB]?
+    @Relationship(inverse: \UserDB.esami) var utente: UserDB?
     var dataQuiz: String
     var orarioQuiz: String
     
-    init(id: Int, Quiz: [Quiz]? = nil, id_utente: Int, dataQuiz: String, orarioQuiz: String) {
+    init(id: Int, quiz: [QuizDB]? = nil, utente: UserDB? = nil, dataQuiz: String, orarioQuiz: String) {
         self.id = id
-        self.Quiz = Quiz
-        self.id_utente = id_utente
+        self.quiz = quiz
+        self.utente = utente
         self.dataQuiz = dataQuiz
         self.orarioQuiz = orarioQuiz
     }
 }
 
 @Model
-class Quiz{
+class QuizDB{
     @Attribute(.unique) var id: Int
-    @Relationship(inverse: \Esame.id) var id_esame: Int
-    @Relationship(inverse: \DomandaQuiz.id) var id_domanda: Int
-    @Relationship(inverse: \Risposta.id) var id_rispostaData: Int
+    @Relationship(inverse: \EsameDB.quiz) var esame: EsameDB?
+    var domanda: DomandaDB?
+    var rispostaData: RispostaDB?
     
-    init(id: Int, id_esame: Int, id_domanda: Int, id_rispostaData: Int) {
+    init(id: Int, esame: EsameDB? = nil, domanda: DomandaDB? = nil, rispostaData: RispostaDB? = nil) {
         self.id = id
-        self.id_esame = id_esame
-        self.id_domanda = id_domanda
-        self.id_rispostaData = id_rispostaData
+        self.esame = esame
+        self.domanda = domanda
+        self.rispostaData = rispostaData
     }
 }
 
 @Model
-class DomandaQuiz {
+class DomandaDB {
     @Attribute(.unique) var id: Int
     var descrizione: String
-    @Relationship(inverse: \Risposta.id) var id_rispostaCoretta: Risposta
+    var id_rispostaCoretta: RispostaDB?
     
-    init(id: Int, descrizione: String, id_rispostaCoretta: Risposta) {
+
+    init(id: Int, descrizione: String, id_rispostaCoretta: RispostaDB? = nil) {
         self.id = id
         self.descrizione = descrizione
         self.id_rispostaCoretta = id_rispostaCoretta
     }
 }
 
-
-
 @Model
-class Risposta{
+class RispostaDB{
     @Attribute(.unique) var id: Int
     var descrizione: String
     
-    
+
     init(id: Int, descrizione: String) {
         self.id = id
         self.descrizione = descrizione
