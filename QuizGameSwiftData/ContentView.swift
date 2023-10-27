@@ -46,74 +46,9 @@ struct Titolo: View {
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
+    @Query private var users: [UserDB]
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
-                }
-                .onDelete(perform: deleteItems)
-            }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
-            }
-        } detail: {
-            Text("Select an item")
-        }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-    
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
-            }
-        }
-    }
-    
-    private func addQuestion(id:Int, descrizione: String, id_RC: RispostaDB){
-        modelContext.insert(DomandaQuiz(id: id, descrizione: descrizione, id_rispostaCoretta: id_RC))
-    }
-    
-    private func addAnswer(id: Int, descrizione:String){
-        modelContext.insert(Risposta(id:id, descrizione: descrizione))
-    }
-}
-
-/*
- struct ContentView: View {
-     var logged = false
+    var logged = false
      
      var body: some View {
          if logged{
@@ -129,10 +64,10 @@ struct ContentView: View {
          }
      }
  }
-*/
+
 
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: UserDB.self, inMemory: true)
 }

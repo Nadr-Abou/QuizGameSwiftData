@@ -12,7 +12,11 @@ import SwiftData
 struct QuizGameSwiftDataApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
-            Item.self,
+            UserDB.self,
+            EsameDB.self,
+            QuizDB.self,
+            DomandaDB.self,
+            RispostaDB.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
